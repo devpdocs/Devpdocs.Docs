@@ -1,0 +1,25 @@
+# Python artifacts and local environments
+.git/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Logs and runtime state
+*.log
+logs/
+.cache/
+cache/
+state/
+*.pid
+*.sock
+
+# Machine-local wallpaper assets
+wallpapers/
+*.jpg
+*.jpeg
+*.png
+*.webp

@@ -1,0 +1,15 @@
+# Runtime state
+.git/
+session.json
+.atl/
+state/
+runtime/
+cache/
+*.log
+*.sock
+*.pid
+
+# Local executable artifacts
+herdr
+bin/
+*.bin

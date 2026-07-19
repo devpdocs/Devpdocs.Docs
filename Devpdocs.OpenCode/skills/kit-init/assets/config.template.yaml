@@ -1,0 +1,154 @@
+# spec-kit.mini/config.yaml — Canonical v1 Template
+#
+# This file is the single source of project definitions consumed by the
+# spec-kit.mini orchestrator. It is always fully rewritten by /kit-init
+# on every run. Validity is schema/content based; file age is irrelevant.
+#
+# Do NOT manually edit this file. Run /kit-init to regenerate it.
+#
+# Schema version: 1.0
+
+schema_version: "1.0"
+generated_at: "2026-06-03T21:00:00Z"
+
+# ─── Project Identity ───────────────────────────────────────────────────────
+
+project:
+  name: "repository-name"          # required, detected from git remote or directory name
+  root: "."                        # required, relative path to project root
+  type: "application"              # required, one of: application, library, service, monorepo, unknown
+
+# ─── Technology Stack ────────────────────────────────────────────────────────
+
+stack:
+  languages:                       # required, detected from configs and file extensions
+    - "typescript"
+  runtimes:                        # optional, null if undetected
+    - "node"
+  package_managers:                # required, detected from lockfiles
+    - "npm"
+  frameworks:                      # optional, null if undetected
+    []
+
+# ─── Testing Setup ───────────────────────────────────────────────────────────
+
+testing:
+  commands:
+    unit: "npm test"               # required if detected, null otherwise
+    integration: null              # optional
+    e2e: null                     # optional
+  capabilities:
+    has_tests: true                # required, true if test dirs/commands detected
+    ci_detected: false             # required, true if CI configs detected
+    coverage_command: null         # optional
+
+# ─── Project Structure ───────────────────────────────────────────────────────
+
+structure:
+  key_paths:
+    source: ["src/"]               # required, detected source directories
+    tests: ["test/"]               # required if detected, null otherwise
+    docs: ["docs/"]                # required if detected, null otherwise
+    config: [".opencode/"]         # optional, governance/config directories
+  monorepo_packages: null          # optional, list of package paths if monorepo
+
+# ─── Conventions ─────────────────────────────────────────────────────────────
+
+conventions:
+  naming:                          # optional, detected naming patterns
+    - "kebab-case-files"
+  linting:                         # optional, detected linter configs
+    - "eslint"
+  formatting:                      # optional, detected formatter configs
+    - "prettier"
+
+# ─── Architecture ────────────────────────────────────────────────────────────
+
+architecture:
+  style: "unknown"                 # required, one of: layered, hexagonal, microservices, monolithic, event-driven, unknown
+  notes:                           # optional, architectural observations
+    []
+  deployment_hints:                # optional, deployment indicators
+    []
+
+# ─── Phase Governance (inherited from spec-kit.mini) ────────────────────────
+
+rules_by_phase:
+  constitution:
+    required:
+      - explicit approval
+      - governing principles
+      - decision rules
+  specify:
+    required:
+      - facts vs assumptions separation
+      - unresolved items carried forward
+      - no premature ambiguity resolution
+  clarify:
+    required:
+      - resolve open questions
+      - challenge assumptions
+      - define acceptance criteria
+  approval:
+    required:
+      - explicit signoff
+      - rejection reasons when applicable
+      - constitution alignment check
+  plan:
+    required:
+      - ordered to-do list
+      - no new scope
+      - validation tasks tied to acceptance criteria
+
+# ─── Quality Assessment ──────────────────────────────────────────────────────
+
+quality:
+  confidence: 0.78                 # required, 0.0–1.0, mean of detection confidences
+  warnings:                        # required, empty array if no warnings
+    - "No integration test command detected"
+    - "No CI configuration found"
+    - "Architecture style could not be determined"
+
+# ─── Evidence ─────────────────────────────────────────────────────────────────
+
+evidence:
+  - signal: "package.json"
+    path: "package.json"
+    confidence: 0.95
+    classification: fact
+    detected:
+      - "project.name"
+      - "stack.languages[typescript]"
+      - "stack.package_managers[npm]"
+      - "testing.commands.unit"
+  - signal: ".git/config"
+    path: ".git/config"
+    confidence: 0.90
+    classification: fact
+    detected:
+      - "project.root"
+  - signal: "directory scan"
+    path: "src/"
+    confidence: 0.85
+    classification: fact
+    detected:
+      - "structure.key_paths.source[src/]"
+  - signal: "directory scan"
+    path: "test/"
+    confidence: 0.85
+    classification: fact
+    detected:
+      - "structure.key_paths.tests[test/]"
+      - "testing.capabilities.has_tests"
+  - signal: "heuristic"
+    path: null
+    confidence: 0.50
+    classification: assumption
+    detected:
+      - "project.type"
+  - signal: "heuristic"
+    path: null
+    confidence: 0.30
+    classification: assumption
+    detected:
+      - "architecture.style"

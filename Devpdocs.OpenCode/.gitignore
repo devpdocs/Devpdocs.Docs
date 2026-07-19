@@ -1,0 +1,27 @@
+# Dependencies and local tooling
+.git/
+node_modules/
+.atl/
+.gentle-ai-default-agent.json
+spec-kit.mini/
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+auth.json
+session*.json
+account*.json
+
+# Runtime data, logs, and caches
+*.log
+logs/
+.cache/
+cache/
+state/
+sessions/
+*.db
+*.sqlite
+*.sqlite3
+*.pid
+*.sock

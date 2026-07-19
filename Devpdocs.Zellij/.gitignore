@@ -1,0 +1,10 @@
+# Repository metadata and downloaded plugins
+.git/
+plugins/*.wasm
+
+# Local logs and caches
+*.log
+logs/
+.cache/
+cache/
+*.tmp
