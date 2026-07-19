@@ -1,0 +1,6 @@
+require "config.settings"
+require "config.lazy"
+require "config.scripts"
+require "config.keymapsettings"
+require "config.jinja2"
+require "config.parse_lua"
