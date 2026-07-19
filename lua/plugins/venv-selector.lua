@@ -1,0 +1,25 @@
+return {
+  'linux-cultist/venv-selector.nvim',
+  --dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "nvim-telescope/telescope.nvim", -- optional: you can also use fzf-lua, snacks, mini-pick instead.
+  },
+  ---dependencies = { 'nvim-lua/plenary.nvim' },
+  opts = {
+    -- Your options go here
+
+    stay_on_this_version = true,
+    auto_refresh = true,
+    name = { 'venv', 'env', 'qtile', '.venv' }
+    -- auto_refresh = false
+  },
+  event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+  keys = {
+    -- Keymap to open VenvSelector to pick a venv.
+    { '<leader>vs', '<cmd>VenvSelect<cr>' },
+    -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
+    { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
+  },
+
+}
